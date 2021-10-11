@@ -9,13 +9,8 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      - name: Deploy
-        uses: appleboy/ssh-action@master
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
         with:
-          host: ${{ secrets.REMOTE_IP }}
-          username: ${{ secrets.REMOTE_SSH_ID }}
-          password: ${{ secrets.REMOTE_SSH_PASSWORD }}
-          port: ${{ secrets.REMOTE_SSH_PORT }}
-          script: |
-            cd /home/admin
-            mkdir test
+          key: ${{ secrets.SSH_PRIVATE_KEY }} 
+          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
