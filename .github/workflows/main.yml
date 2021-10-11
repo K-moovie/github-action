@@ -9,8 +9,13 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
+      - name: Deploy
+        uses: appleboy/ssh-action@master
         with:
-          key: ${{ secrets.REMOTE_SSH_KEY }} 
-          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
+          host: ${{ secrets.REMOTE_IP }}
+          username: ${{ secrets.REMOTE_SSH_ID }}
+          key: ${{ secrets.REMOTE_SSH_KEY }}
+          port: ${{ secrets.REMOTE_SSH_PORT }}
+          script: |
+            cd /home/ubuntu/ezhome
+            mkdir test2
